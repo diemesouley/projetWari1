@@ -10,11 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
 
 
 /**
- * @Route("/compte/partenaire")
+ * @Route("/api/compte/partenaire")
  */
 class ComptePartenaireController extends AbstractController
 {
@@ -30,6 +31,7 @@ class ComptePartenaireController extends AbstractController
 
     /**
      * @Route("/new", name="comptepartenairenew", methods={"GET","POST"})
+     * @IsGranted("ROLE_PARTENAIRE")
      */
     public function ajout(Request $request,SerializerInterface $serializer, EntityManagerInterface $entityManager): Response
     {
@@ -46,6 +48,7 @@ class ComptePartenaireController extends AbstractController
 
     /**
      * @Route("/{id}", name="compte_partenaire_show", methods={"GET"})
+     * @IsGranted("ROLE_PARTENAIRE")
      */
     public function show(ComptePartenaire $comptePartenaire): Response
     {
@@ -56,6 +59,8 @@ class ComptePartenaireController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="compte_partenaire_edit", methods={"GET","POST"})
+     * @IsGranted("ROLE_PARTENAIRE")
+
      */
     public function edit(Request $request, ComptePartenaire $comptePartenaire): Response
     {
@@ -76,6 +81,8 @@ class ComptePartenaireController extends AbstractController
 
     /**
      * @Route("/{id}", name="compte_partenaire_delete", methods={"DELETE"})
+     * @IsGranted("ROLE_PARTENAIRE")
+
      */
     public function delete(Request $request, ComptePartenaire $comptePartenaire): Response
     {

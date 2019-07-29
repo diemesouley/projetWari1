@@ -10,11 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\Partenaire;
+
 
 /**
- * @Route("/administrateur")
+ * @Route("/api/administrateur")
+ * @IsGranted("ROLE_PARTENAIRE") 
  */
 class AdministrateurController extends AbstractController
 {

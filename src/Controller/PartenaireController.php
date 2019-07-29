@@ -16,7 +16,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("/partenaire")
+ * @Route("/api/partenaire")
+ * @IsGranted("ROLE_SUPER_ADMIN") 
  */
 class PartenaireController extends AbstractController
 {
@@ -32,7 +33,6 @@ class PartenaireController extends AbstractController
 
     /**
      * @Route("/new", name="partenairenew", methods={"GET","POST"})
-     * @Route("has_role('ROLE_ADMIN')")
      */
     public function ajout(Request $request,SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -85,17 +85,5 @@ class PartenaireController extends AbstractController
         return new JsonResponse($data);
     }
 
-    /**
-     * @Route("/{id}", name="partenaire_delete", methods={"DELETE"})
-     */
-    /*public function delete(Request $request, Partenaire $partenaire): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$partenaire->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($partenaire);
-            $entityManager->flush();
-        }
 
-        return $this->redirectToRoute('partenaire_index');
-    }*/
 }
